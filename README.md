@@ -1,6 +1,6 @@
 # numpy-stubs: experimental typing stubs for NumPy
 
-[![Build Status](https://travis-ci.org/numpy/numpy_stubs.svg?branch=master)](https://travis-ci.org/numpy/numpy_stubs)
+[![Build Status](https://travis-ci.org/numpy/numpy-stubs.svg?branch=master)](https://travis-ci.org/numpy/numpy-stubs)
 
 This repository exists for developing [PEP 484](https://www.python.org/dev/peps/pep-0484/)
 compatible typing annotations for [NumPy](https://github.com/numpy/numpy).
