@@ -5,6 +5,7 @@ import datetime as dt
 from numpy.core._internal import _ctypes
 from typing import (
     Any,
+    ByteString,
     Container,
     Dict,
     IO,
@@ -81,6 +82,8 @@ _DtypeLike = Union[
 ]
 
 _NdArraySubClass = TypeVar("_NdArraySubClass", bound=ndarray)
+
+_ArrayLike = TypeVar("_ArrayLike")
 
 class dtype:
     names: Optional[Tuple[str, ...]]
