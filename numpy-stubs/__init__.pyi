@@ -571,7 +571,10 @@ def isclose(
 def array_equal(a1: _ArrayLike, a2: _ArrayLike) -> bool: ...
 def array_equiv(a1: _ArrayLike, a2: _ArrayLike) -> bool: ...
 
-# Numerical constants
+#
+# Constants
+#
+
 Inf: float
 Infinity: float
 NAN: float
@@ -586,6 +589,34 @@ inf: float
 infty: float
 nan: float
 pi: float
+
+ALLOW_THREADS: int
+BUFSIZE: int
+CLIP: int
+ERR_CALL: int
+ERR_DEFAULT: int
+ERR_IGNORE: int
+ERR_LOG: int
+ERR_PRINT: int
+ERR_RAISE: int
+ERR_WARN: int
+FLOATING_POINT_SUPPORT: int
+FPE_DIVIDEBYZERO: int
+FPE_INVALID: int
+FPE_OVERFLOW: int
+FPE_UNDERFLOW: int
+MAXDIMS: int
+MAY_SHARE_BOUNDS: int
+MAY_SHARE_EXACT: int
+RAISE: int
+SHIFT_DIVIDEBYZERO: int
+SHIFT_INVALID: int
+SHIFT_OVERFLOW: int
+SHIFT_UNDERFLOW: int
+UFUNC_BUFSIZE_DEFAULT: int
+WRAP: int
+little_endian: int
+tracemalloc_domain: int
 
 # TODO(shoyer): remove when the full numpy namespace is defined
 def __getattr__(name: str) -> Any: ...
