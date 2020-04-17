@@ -12,3 +12,4 @@ np.sin(1, signature='D')
 np.sin(1, extobj=[16, 1, lambda: None])
 np.sin(1) + np.sin(1)
 np.sin.types[0]
+np.sin.__name__

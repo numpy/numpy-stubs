@@ -620,6 +620,8 @@ little_endian: int
 tracemalloc_domain: int
 
 class ufunc:
+    @property
+    def __name__(self) -> str: ...
     def __call__(
         self,
         *args: _ArrayLike,
