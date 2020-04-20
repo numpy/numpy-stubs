@@ -35,6 +35,9 @@ if sys.version_info[0] < 3:
 else:
     from typing import SupportsBytes
 
+# TODO: remove when the full numpy namespace is defined
+def __getattr__(name: str) -> Any: ...
+
 _Shape = Tuple[int, ...]
 
 # Anything that can be coerced to a shape tuple
@@ -775,9 +778,6 @@ tan: ufunc
 tanh: ufunc
 true_divide: ufunc
 trunc: ufunc
-
-# TODO(shoyer): remove when the full numpy namespace is defined
-def __getattr__(name: str) -> Any: ...
 
 # Warnings
 class ModuleDeprecationWarning(DeprecationWarning): ...
