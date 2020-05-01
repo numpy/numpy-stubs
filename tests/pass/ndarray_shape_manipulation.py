@@ -1,42 +1,47 @@
 import numpy as np
 
-nd = np.array([[1, 2], [3, 4]])
+nd1 = np.array([[1, 2], [3, 4]])
 
 # reshape
-nd.reshape()
-nd.reshape(4)
-nd.reshape(2, 2)
-nd.reshape((2, 2))
+nd1.reshape(4)
+nd1.reshape(2, 2)
+nd1.reshape((2, 2))
 
-nd.reshape((2, 2), order="C")
-nd.reshape(4, order="C")
+nd1.reshape((2, 2), order="C")
+nd1.reshape(4, order="C")
 
 # resize
-nd.resize()
-nd.resize(4)
-nd.resize(2, 2)
-nd.resize((2, 2))
+nd1.resize()
+nd1.resize(4)
+nd1.resize(2, 2)
+nd1.resize((2, 2))
 
-nd.resize((2, 2), refcheck=True)
-nd.resize(4, refcheck=True)
+nd1.resize((2, 2), refcheck=True)
+nd1.resize(4, refcheck=True)
+
+nd2 = np.array([[1, 2], [3, 4]])
 
 # transpose
-nd.transpose()
-nd.transpose(1, 0)
-nd.transpose((1, 0))
+nd2.transpose()
+nd2.transpose(1, 0)
+nd2.transpose((1, 0))
 
 # swapaxes
-nd.swapaxes(0, 1)
+nd2.swapaxes(0, 1)
 
 # flatten
-nd.flatten()
-nd.flatten("C")
+nd2.flatten()
+nd2.flatten("C")
 
 # ravel
-nd.ravel()
-nd.ravel("C")
+nd2.ravel()
+nd2.ravel("C")
 
 # squeeze
-nd.squeeze()
-nd.squeeze(0)
-nd.squeeze((0, 2))
+nd2.squeeze()
+
+nd3 = np.array([[1, 2]])
+nd3.squeeze(0)
+
+nd4 = np.array([[[1, 2]]])
+nd4.squeeze((0, 1))

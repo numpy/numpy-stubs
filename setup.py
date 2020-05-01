@@ -22,7 +22,7 @@ setup(
     packages=["numpy-stubs"],
     # PEP 561 requires these
     install_requires=[
-        "numpy>=1.14.0",
+        "numpy>=1.16.0",
         'typing_extensions>=3.7.4; python_version<"3.8"',
     ],
     package_data=find_stubs("numpy-stubs"),

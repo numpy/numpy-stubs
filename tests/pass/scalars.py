@@ -17,7 +17,6 @@ class A:
         return 4.0
 
 
-np.complex32(3)
 np.complex64(3j)
 np.complex64(C())
 

@@ -1,3 +1,5 @@
+import importlib.util
+import itertools
 import os
 import re
 from collections import defaultdict
@@ -86,3 +88,12 @@ def test_reveal(path):
         assert "Revealed type is" in error_line
         marker = lines[lineno - 1].split("# E:")[-1].strip()
         assert marker in error_line
+
+
+@pytest.mark.parametrize("path", get_test_cases(PASS_DIR))
+def test_code_runs(path):
+    path_without_extension, _ = os.path.splitext(path)
+    dirname, filename = path.split(os.sep)[-2:]
+    spec = importlib.util.spec_from_file_location(f"{dirname}.{filename}", path)
+    test_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(test_module)

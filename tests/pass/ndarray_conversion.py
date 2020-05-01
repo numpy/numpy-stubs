@@ -1,9 +1,12 @@
+import tempfile
+
 import numpy as np
 
 nd = np.array([[1, 2], [3, 4]])
+scalar_array = np.array(1)
 
 # item
-nd.item()  # `nd` should be one-element in runtime
+scalar_array.item()
 nd.item(1)
 nd.item(0, 1)
 nd.item((0, 1))
@@ -11,7 +14,7 @@ nd.item((0, 1))
 # tolist is pretty simple
 
 # itemset
-nd.itemset(3)  # `nd` should be one-element in runtime
+scalar_array.itemset(3)
 nd.itemset(3, 0)
 nd.itemset((0, 0), 3)
 
@@ -25,14 +28,15 @@ nd.tobytes("C")
 nd.tobytes(None)
 
 # tofile
-nd.tofile("a.txt")
-nd.tofile(open("a.txt", mode="bw"))
+with tempfile.NamedTemporaryFile(suffix=".txt") as tmp:
+    nd.tofile(tmp.name)
+    nd.tofile(tmp.name, "")
+    nd.tofile(tmp.name, sep="")
 
-nd.tofile("a.txt", "")
-nd.tofile("a.txt", sep="")
+    nd.tofile(tmp.name, "", "%s")
+    nd.tofile(tmp.name, format="%s")
 
-nd.tofile("a.txt", "", "%s")
-nd.tofile("a.txt", format="%s")
+    nd.tofile(tmp)
 
 # dump is pretty simple
 # dumps is pretty simple
@@ -69,11 +73,13 @@ nd.view(np.int64, np.matrix)
 nd.view(type=np.matrix)
 
 # getfield
-nd.getfield("float")
-nd.getfield(float)
+complex_array = np.array([[1 + 1j, 0], [0, 1 - 1j]], dtype=np.complex128)
 
-nd.getfield("float", 8)
-nd.getfield(float, offset=8)
+complex_array.getfield("float")
+complex_array.getfield(float)
+
+complex_array.getfield("float", 8)
+complex_array.getfield(float, offset=8)
 
 # setflags
 nd.setflags()

@@ -114,7 +114,8 @@ array *= 1
 
 array / 1
 1 / array
-array /= 1
+float_array = np.array([1.0, 2.0])
+float_array /= 1
 
 array // 1
 1 // array
