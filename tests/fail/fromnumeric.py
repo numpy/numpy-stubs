@@ -7,17 +7,17 @@ A.setflags(write=False)
 
 a = np.bool_(True)
 
-np.take(a, None)  # E: No overload variant of "take" matches argument types
-np.take(a, axis=1.0)  # E: No overload variant of "take" matches argument types
-np.take(A, out=1)  # E: No overload variant of "take" matches argument types
-np.take(A, mode="bob")  # E: No overload variant of "take" matches argument types
+np.take(a, None)  # E: No overload variant of "take" matches argument type
+np.take(a, axis=1.0)  # E: No overload variant of "take" matches argument type
+np.take(A, out=1)  # E: No overload variant of "take" matches argument type
+np.take(A, mode="bob")  # E: No overload variant of "take" matches argument type
 
 np.reshape(a, None)  # E: Argument 2 to "reshape" has incompatible type
 np.reshape(A, 1, order="bob")  # E: Argument "order" to "reshape" has incompatible type
 
-np.choose(a, None)  # E: No overload variant of "choose" matches argument types
-np.choose(a, out=1.0)  # E: No overload variant of "choose" matches argument types
-np.choose(A, mode="bob")  # E: No overload variant of "choose" matches argument types
+np.choose(a, None)  # E: No overload variant of "choose" matches argument type
+np.choose(a, out=1.0)  # E: No overload variant of "choose" matches argument type
+np.choose(A, mode="bob")  # E: No overload variant of "choose" matches argument type
 
 np.repeat(a, None)  # E: Argument 2 to "repeat" has incompatible type
 np.repeat(A, 1, axis=1.0)  # E: Argument "axis" to "repeat" has incompatible type
@@ -40,12 +40,14 @@ np.partition(
     A, 0, order=range(5)  # E: Argument "order" to "partition" has incompatible type
 )
 
-np.argpartition(a, None)  # E: Argument 2 to "argpartition" has incompatible type
-np.argpartition(
-    a, 0, axis="bob"  # E: Argument "axis" to "argpartition" has incompatible type
+np.argpartition(  # E: No overload variant of "argpartition" matches argument type
+    a, None
 )
-np.argpartition(
-    A, 0, kind="bob"  # E: Argument "kind" to "argpartition" has incompatible type
+np.argpartition(  # E: No overload variant of "argpartition" matches argument type
+    a, 0, axis="bob"
+)
+np.argpartition(  # E: No overload variant of "argpartition" matches argument type
+    A, 0, kind="bob"
 )
 np.argpartition(
     A, 0, order=range(5)  # E: Argument "order" to "argpartition" has incompatible type

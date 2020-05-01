@@ -830,14 +830,28 @@ _ScalarNumpy = Union[generic, dt.datetime, dt.timedelta]
 _ScalarBuiltin = Union[str, bytes, dt.date, dt.timedelta, bool, int, float, complex]
 _Scalar = Union[_ScalarBuiltin, _ScalarNumpy]
 
-_ScalarGeneric = TypeVar(
-    "_ScalarGeneric", bound=Union[dt.datetime, dt.timedelta, generic]
+# Integers and booleans can generally be used interchangeably
+_ScalarIntOrBool = TypeVar("_ScalarIntOrBool", bound=Union[integer, bool_])
+_ScalarGeneric = TypeVar("_ScalarGeneric", bound=generic)
+_ScalarGenericDT = TypeVar(
+    "_ScalarGenericDT", bound=Union[dt.datetime, dt.timedelta, generic]
 )
 
 # An array-like object consisting of integers
 _Int = Union[int, integer]
+_Bool = Union[bool, bool_]
+_IntOrBool = Union[_Int, _Bool]
 _ArrayLikeIntNested = Any  # TODO: wait for support for recursive types
-_ArrayLikeInt = Union[_Int, ndarray, Sequence[_Int], Sequence[_ArrayLikeIntNested]]
+_ArrayLikeBoolNested = Any  # TODO: wait for support for recursive types
+
+# Integers and booleans can generally be used interchangeably
+_ArrayLikeIntOrBool = Union[
+    _IntOrBool,
+    ndarray,
+    Sequence[_IntOrBool],
+    Sequence[_ArrayLikeIntNested],
+    Sequence[_ArrayLikeBoolNested],
+]
 
 # The signature of take() follows a common theme with its overloads:
 # 1. A generic comes in; the same generic comes out
@@ -846,12 +860,12 @@ _ArrayLikeInt = Union[_Int, ndarray, Sequence[_Int], Sequence[_ArrayLikeIntNeste
 # 4. An array-like object comes in; an ndarray or generic comes out
 @overload
 def take(
-    a: _ScalarGeneric,
+    a: _ScalarGenericDT,
     indices: int,
     axis: Optional[int] = ...,
     out: Optional[ndarray] = ...,
     mode: _Mode = ...,
-) -> _ScalarGeneric: ...
+) -> _ScalarGenericDT: ...
 @overload
 def take(
     a: _Scalar,
@@ -871,7 +885,7 @@ def take(
 @overload
 def take(
     a: _ArrayLike,
-    indices: _ArrayLikeInt,
+    indices: _ArrayLikeIntOrBool,
     axis: Optional[int] = ...,
     out: Optional[ndarray] = ...,
     mode: _Mode = ...,
@@ -879,29 +893,31 @@ def take(
 def reshape(a: _ArrayLike, newshape: _ShapeLike, order: _Order = ...) -> ndarray: ...
 @overload
 def choose(
-    a: _ScalarGeneric,
+    a: _ScalarIntOrBool,
     choices: Union[Sequence[_ArrayLike], ndarray],
     out: Optional[ndarray] = ...,
     mode: _Mode = ...,
-) -> _ScalarGeneric: ...
+) -> _ScalarIntOrBool: ...
 @overload
 def choose(
-    a: _Scalar,
+    a: _IntOrBool,
     choices: Union[Sequence[_ArrayLike], ndarray],
     out: Optional[ndarray] = ...,
     mode: _Mode = ...,
-) -> _ScalarNumpy: ...
+) -> Union[integer, bool_]: ...
 @overload
 def choose(
-    a: _ArrayLike,
+    a: _ArrayLikeIntOrBool,
     choices: Union[Sequence[_ArrayLike], ndarray],
     out: Optional[ndarray] = ...,
     mode: _Mode = ...,
 ) -> ndarray: ...
 def repeat(
-    a: _ArrayLike, repeats: _ArrayLikeInt, axis: Optional[int] = ...
+    a: _ArrayLike, repeats: _ArrayLikeIntOrBool, axis: Optional[int] = ...
 ) -> ndarray: ...
-def put(a: ndarray, ind: _ArrayLikeInt, v: _ArrayLike, mode: _Mode = ...) -> None: ...
+def put(
+    a: ndarray, ind: _ArrayLikeIntOrBool, v: _ArrayLike, mode: _Mode = ...
+) -> None: ...
 def swapaxes(
     a: Union[Sequence[_ArrayLike], ndarray], axis1: int, axis2: int
 ) -> ndarray: ...
@@ -910,14 +926,31 @@ def transpose(
 ) -> ndarray: ...
 def partition(
     a: _ArrayLike,
-    kth: _ArrayLikeInt,
+    kth: _ArrayLikeIntOrBool,
     axis: Optional[int] = ...,
     kind: _PartitionKind = ...,
     order: Union[None, str, Sequence[str]] = ...,
 ) -> ndarray: ...
+@overload
+def argpartition(
+    a: generic,
+    kth: _ArrayLikeIntOrBool,
+    axis: Optional[int] = ...,
+    kind: _PartitionKind = ...,
+    order: Union[None, str, Sequence[str]] = ...,
+) -> integer: ...
+@overload
+def argpartition(
+    a: _ScalarBuiltin,
+    kth: _ArrayLikeIntOrBool,
+    axis: Optional[int] = ...,
+    kind: _PartitionKind = ...,
+    order: Union[None, str, Sequence[str]] = ...,
+) -> ndarray: ...
+@overload
 def argpartition(
     a: _ArrayLike,
-    kth: _ArrayLikeInt,
+    kth: _ArrayLikeIntOrBool,
     axis: Optional[int] = ...,
     kind: _PartitionKind = ...,
     order: Union[None, str, Sequence[str]] = ...,

@@ -39,15 +39,8 @@ reveal_type(np.reshape(c, 1))  # E: numpy.ndarray
 reveal_type(np.reshape(A, 1))  # E: numpy.ndarray
 reveal_type(np.reshape(B, 1))  # E: numpy.ndarray
 
-reveal_type(np.choose(a, [True]))  # E: numpy.bool_
-reveal_type(np.choose(b, [1.0]))  # E: numpy.float32
-reveal_type(
-    np.choose(  # E: Union[numpy.generic, datetime.datetime, datetime.timedelta]
-        c, [1.0]
-    )
-)
-reveal_type(np.choose(A, [True]))  # E: numpy.ndarray
-reveal_type(np.choose(B, [1.0]))  # E: numpy.ndarray
+reveal_type(np.choose(a, [True, True]))  # E: numpy.bool_
+reveal_type(np.choose(A, [True, True]))  # E: numpy.ndarray
 
 reveal_type(np.repeat(a, 1))  # E: numpy.ndarray
 reveal_type(np.repeat(b, 1))  # E: numpy.ndarray
@@ -66,14 +59,14 @@ reveal_type(np.transpose(c))  # E: numpy.ndarray
 reveal_type(np.transpose(A))  # E: numpy.ndarray
 reveal_type(np.transpose(B))  # E: numpy.ndarray
 
-reveal_type(np.partition(a, 0))  # E: numpy.ndarray
-reveal_type(np.partition(b, 0))  # E: numpy.ndarray
-reveal_type(np.partition(c, 0))  # E: numpy.ndarray
+reveal_type(np.partition(a, 0, axis=None))  # E: numpy.ndarray
+reveal_type(np.partition(b, 0, axis=None))  # E: numpy.ndarray
+reveal_type(np.partition(c, 0, axis=None))  # E: numpy.ndarray
 reveal_type(np.partition(A, 0))  # E: numpy.ndarray
 reveal_type(np.partition(B, 0))  # E: numpy.ndarray
 
-reveal_type(np.argpartition(a, 0))  # E: numpy.ndarray
-reveal_type(np.argpartition(b, 0))  # E: numpy.ndarray
+reveal_type(np.argpartition(a, 0))  # E: numpy.integer
+reveal_type(np.argpartition(b, 0))  # E: numpy.integer
 reveal_type(np.argpartition(c, 0))  # E: numpy.ndarray
 reveal_type(np.argpartition(A, 0))  # E: numpy.ndarray
 reveal_type(np.argpartition(B, 0))  # E: numpy.ndarray
