@@ -16,11 +16,22 @@ BLACKLIST = {
     "numpy": {
         # Stdlib modules in the namespace by accident
         "absolute_import",
+        "division",
+        "print_function",
         "warnings",
-        # Accidentally public
+        # Accidentally public, deprecated, or shouldn't be used
+        "Tester",
         "add_docstring",
         "add_newdoc",
         "add_newdoc_ufunc",
+        "core",
+        "fastCopyAndTranspose",
+        "get_array_wrap",
+        "int_asbuffer",
+        "oldnumeric",
+        "safe_eval",
+        "set_numeric_ops",
+        "test",
         # Builtins
         "bool",
         "complex",
@@ -41,6 +52,9 @@ BLACKLIST = {
         "ppmt",
         "pv",
         "rate",
+        # More standard names should be preferred
+        "alltrue",  # all
+        "sometrue",  # any
     }
 }
 
